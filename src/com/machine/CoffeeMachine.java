@@ -5,30 +5,36 @@ import java.util.Scanner;
 public class CoffeeMachine {
 
     public static void main(String[] args) {
-        System.out.println("Write how many cups of coffee you will need:");
-
         Scanner scanner = new Scanner(System.in);
-        int cups = scanner.nextInt();
 
         final int WATER_PER_SERVING = 200;
         final int MILK_PER_SERVING = 50;
         final int BEANS_PER_SERVING = 15;
 
-        int waterTotal = cups * WATER_PER_SERVING;
-        int milkTotal = cups * MILK_PER_SERVING;
-        int beansTotal = cups * BEANS_PER_SERVING;
+        System.out.println("Write how many ml of water the coffee machine has:");
+        int cupsFromWater = scanner.nextInt() / WATER_PER_SERVING;
+        System.out.println("Write how many ml of milk the coffee machine has:");
+        int cupsFromMilk = scanner.nextInt() / MILK_PER_SERVING;
+        System.out.println("Write how many grams of coffee beans the coffee machine has:");
+        int cupsFromBeans = scanner.nextInt() / BEANS_PER_SERVING;
 
-        String resultMessage = String.format(
-            "For %d cups of coffee you will need:\n"
-                + "%d ml of water\n"
-                + "%d ml of milk\n"
-                + "%d g of coffee beans",
-            cups,
-            waterTotal,
-            milkTotal,
-            beansTotal
-        );
+        int cupsInMachine = Math.min(cupsFromWater,
+                Math.min(cupsFromMilk, cupsFromBeans));
 
-        System.out.println(resultMessage);
+        System.out.println("Write how many cups of coffee you will need:");
+        int cupsNeeded = scanner.nextInt();
+
+        if (cupsNeeded < cupsInMachine) {
+            System.out.println(
+                    String.format("Yes, I can make that amount of coffee"
+                            + "(and even %d more than that)", cupsInMachine - cupsNeeded)
+            );
+        } else if (cupsNeeded > cupsInMachine) {
+            System.out.println(
+                    String.format("No, I can make only %d cup(s) of coffee", cupsInMachine)
+            );
+        } else {
+            System.out.println("Yes, I can make that amount of coffee");
+        }
     }
 }
