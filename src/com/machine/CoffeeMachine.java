@@ -7,34 +7,80 @@ public class CoffeeMachine {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        final int WATER_PER_SERVING = 200;
-        final int MILK_PER_SERVING = 50;
-        final int BEANS_PER_SERVING = 15;
+        int water = 400;
+        int milk = 540;
+        int beans = 120;
+        int money = 550;
+        int disposableCups = 9;
 
-        System.out.println("Write how many ml of water the coffee machine has:");
-        int cupsFromWater = scanner.nextInt() / WATER_PER_SERVING;
-        System.out.println("Write how many ml of milk the coffee machine has:");
-        int cupsFromMilk = scanner.nextInt() / MILK_PER_SERVING;
-        System.out.println("Write how many grams of coffee beans the coffee machine has:");
-        int cupsFromBeans = scanner.nextInt() / BEANS_PER_SERVING;
+        System.out.println(
+                String.format("The coffee machine has:\n"
+                            + "%d ml of water\n"
+                            + "%d ml of milk\n"
+                            + "%d g of coffee beans\n"
+                            + "%d disposable cups\n"
+                            + "$%d of money\n",
+                    water,
+                    milk,
+                    beans,
+                    disposableCups,
+                    money)
+        );
 
-        int cupsInMachine = Math.min(cupsFromWater,
-                Math.min(cupsFromMilk, cupsFromBeans));
+        System.out.println("Write action (buy, fill, take):");
+        String action = scanner.nextLine();
 
-        System.out.println("Write how many cups of coffee you will need:");
-        int cupsNeeded = scanner.nextInt();
-
-        if (cupsNeeded < cupsInMachine) {
-            System.out.println(
-                    String.format("Yes, I can make that amount of coffee"
-                            + "(and even %d more than that)", cupsInMachine - cupsNeeded)
-            );
-        } else if (cupsNeeded > cupsInMachine) {
-            System.out.println(
-                    String.format("No, I can make only %d cup(s) of coffee", cupsInMachine)
-            );
-        } else {
-            System.out.println("Yes, I can make that amount of coffee");
+        switch (action) {
+            case "buy":
+                System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
+                int operation = scanner.nextInt();
+                if (operation == 1) {
+                    water -= 250;
+                    beans -= 16;
+                    disposableCups -= 1;
+                    money += 4;
+                } else if (operation == 2) {
+                    water -= 350;
+                    milk -= 75;
+                    beans -= 20;
+                    disposableCups -= 1;
+                    money += 7;
+                } else {
+                    water -= 200;
+                    milk -= 100;
+                    beans -= 12;
+                    disposableCups -= 1;
+                    money += 6;
+                }
+                break;
+            case "fill":
+                System.out.println("Write how many ml of water you want to add:");
+                water += scanner.nextInt();
+                System.out.println("Write how many ml of milk you want to add:");
+                milk += scanner.nextInt();
+                System.out.println("Write how many grams of coffee beans you want to add:");
+                beans += scanner.nextInt();
+                System.out.println("Write how many disposable cups of coffee you want to add:");
+                disposableCups += scanner.nextInt();
+                break;
+            case "take":
+                System.out.println("I gave you $" + money + "\n");
+                money = 0;
+                break;
         }
+
+        System.out.println(
+                String.format("The coffee machine has:\n"
+                                + "%d ml of water\n"
+                                + "%d ml of milk\n"
+                                + "%d g of coffee beans\n"
+                                + "%d disposable cups\n"
+                                + "$%d of money\n",
+                        water,
+                        milk,
+                        beans,
+                        disposableCups,
+                        money)
+        );
     }
 }
