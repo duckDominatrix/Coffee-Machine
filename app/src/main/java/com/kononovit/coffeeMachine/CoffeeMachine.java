@@ -1,4 +1,4 @@
-package com.machine;
+package com.kononovit.coffeeMachine;
 
 public class CoffeeMachine {
     int water;

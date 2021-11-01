@@ -1,4 +1,4 @@
-package com.machine;
+package com.kononovit.coffeeMachine;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package com.machine;
+package com.kononovit.coffeeMachine;
 
 public enum Drink {
     ESPRESSO(250, 0, 16, 1, 4),
